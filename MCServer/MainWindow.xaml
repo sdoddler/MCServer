@@ -1,0 +1,71 @@
+﻿<Window x:Class="MCServer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+        xmlns:local="clr-namespace:MCServer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="552" Width="870.5" Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="599*"/>
+            <ColumnDefinition Width="88*"/>
+            <ColumnDefinition Width="65*"/>
+            <ColumnDefinition Width="110*"/>
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="77" Margin="10,143,0,0" VerticalAlignment="Top" Width="399"/>
+
+        <Button x:Name="startServer" Content="Start Server" HorizontalAlignment="Left" Margin="27,10,0,0" VerticalAlignment="Top" Width="218" Height="62" FontSize="36" Click="StartServer_Click"/>
+        <TextBox x:Name="LogBox" HorizontalAlignment="Left" Height="Auto" Margin="10,330,0,11" TextWrapping="Wrap" Text="Log Box" VerticalAlignment="Stretch" Width="399" FontSize="10" CaretBrush="#FF020202" SelectionOpacity="0" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
+        <TextBox x:Name="txtServerJar" HorizontalAlignment="Left" Height="22" Margin="27,99,0,0" TextWrapping="Wrap" Text="Server.jar not located" VerticalAlignment="Top" Width="218" IsEnabled="False"/>
+        <Button Content="Browse" HorizontalAlignment="Left" Margin="262,99,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button x:Name="stopServer" Content="Stop Server" HorizontalAlignment="Left" Margin="552,10,0,0" VerticalAlignment="Top" Width="218" Height="62" FontSize="36" Click="StopServer_Click" Grid.ColumnSpan="4"/>
+        <Label Content="Options" HorizontalAlignment="Left" Height="31" Margin="10,143,0,0" VerticalAlignment="Top" Width="67"/>
+        <TextBox x:Name="ramMin" HorizontalAlignment="Left" Height="23" Margin="77,179,0,0" AcceptsReturn="False" TextWrapping="NoWrap" Text="1024M" VerticalAlignment="Top" Width="67"/>
+        <Label Content="RamMin" HorizontalAlignment="Left" Margin="22,176,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="ramMax" HorizontalAlignment="Left" Height="23" Margin="222,178,0,0" AcceptsReturn="False" TextWrapping="NoWrap" Text="1024M" VerticalAlignment="Top" Width="68"/>
+        <Label Content="RamMax" HorizontalAlignment="Left" Margin="168,175,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chkNoGui" Content="nogui" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="318,181,0,0" Checked="ChkNoGui_Checked" Unchecked="ChkNoGui_Unchecked"/>
+        <Label Content="Direct Command" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.4,0.5"/>
+        <TextBox x:Name="txtCommandBox" HorizontalAlignment="Left" Height="25" Margin="22,273,0,0" TextWrapping="NoWrap" AcceptsReturn="False" Text="say Hello" VerticalAlignment="Top" Width="268"/>
+        <Button x:Name="btnSendCommand" Content="Send" HorizontalAlignment="Left" Height="25" Margin="318,273,0,0" VerticalAlignment="Top" Width="75" Click="SendCommand_Click"/>
+        <ListBox x:Name="listMotd" HorizontalAlignment="Left" Height="103" Margin="507,143,0,0" VerticalAlignment="Top" Width="324" SelectionMode="Multiple" Grid.ColumnSpan="4"/>
+        <Label Content="Server Messages" HorizontalAlignment="Left" Height="33" Margin="497,86,0,0" VerticalAlignment="Top" Width="135" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtMotd" AcceptsReturn="False" HorizontalAlignment="Left" Height="23" Margin="507,115,0,0" TextWrapping="NoWrap" Text="Welcome to my Minecraft Server" VerticalAlignment="Top" Width="170" Grid.ColumnSpan="2" PreviewTextInput="TxtMotd_PreviewTextInput"/>
+        <Button x:Name="btnAddMotd" Content="Add" HorizontalAlignment="Left" Margin="3,115,0,0" VerticalAlignment="Top" Width="76" Height="23" Click="BtnAddMotd_Click" Grid.Column="3"/>
+        <Button x:Name="btnRemoveMOTD" Content="Remove" HorizontalAlignment="Left" Margin="3,257,0,0" VerticalAlignment="Top" Width="76" Grid.Column="3" Click="BtnRemoveMOTD_Click"/>
+        <ComboBox x:Name="comboMOTD" HorizontalAlignment="Left" Margin="593,257,0,0" VerticalAlignment="Top" Width="50" IsReadOnly="True" SelectedIndex="0" Grid.ColumnSpan="2">
+            <ComboBoxItem Content="1"/>
+            <ComboBoxItem Content="2"/>
+            <ComboBoxItem Content="5"/>
+            <ComboBoxItem Content="10"/>
+            <ComboBoxItem Content="15"/>
+            <ComboBoxItem Content="20"/>
+            <ComboBoxItem Content="30"/>
+            <ComboBoxItem Content="45"/>
+            <ComboBoxItem Content="60"/>
+        </ComboBox>
+        <Label Content="Msg Frequency" HorizontalAlignment="Left" Margin="497,254,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.902,0.538"/>
+        <Label Content="Minute(s)" HorizontalAlignment="Left" Margin="44,255,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.902,0.538" Grid.ColumnSpan="2" Grid.Column="1"/>
+        <Label Content="Schedule Restarts" HorizontalAlignment="Left" Height="30" Margin="482,324,0,0" VerticalAlignment="Top" Width="106"/>
+        <RadioButton x:Name="radTimeOfDay" Content="Time of Day" HorizontalAlignment="Left" Height="19" Margin="497,359,0,0" VerticalAlignment="Top" Width="91" GroupName="Group1" IsChecked="True" Checked="RadioButton_Checked"/>
+        <RadioButton x:Name="radSpecifiedTime" Content="After Specified Server UpTime" HorizontalAlignment="Left" Height="19" Margin="497,416,0,0" VerticalAlignment="Top" Width="190" GroupName="Group1" Checked="RadioButton_Checked_1" Grid.ColumnSpan="2"/>
+        <CheckBox x:Name="chkautoStart" Content="Auto-Start Server" HorizontalAlignment="Left" Margin="290,39,0,0" VerticalAlignment="Top" Checked="ChkautoStart_Checked" Unchecked="ChkautoStart_Unchecked"/>
+        <ComboBox x:Name="comboAMPM" HorizontalAlignment="Left" Margin="44,383,0,0" VerticalAlignment="Top" Width="60" SelectedIndex="0" SelectionChanged="ComboAMPM_SelectionChanged" Grid.ColumnSpan="2" Grid.Column="1">
+            <ComboBoxItem Content="AM"/>
+            <ComboBoxItem Content="PM"/>
+        </ComboBox>
+        <CheckBox x:Name="chkRestart" Content="Enable Restarts" HorizontalAlignment="Left" Margin="19,330,0,0" VerticalAlignment="Top" Checked="ChkRestart_Checked" Unchecked="ChkRestart_Unchecked" Grid.ColumnSpan="2" Grid.Column="1"/>
+        <TextBox x:Name="txtHoursRestart" HorizontalAlignment="Left" Height="25" Margin="512,448,0,0" TextWrapping="NoWrap" AcceptsReturn="False" Text="24" VerticalAlignment="Top" Width="70" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TxtHoursRestart_TextChanged"/>
+        <Label Content="Hours" HorizontalAlignment="Left" Margin="593,448,0,0" VerticalAlignment="Top" Height="25" Width="66" Grid.ColumnSpan="2"/>
+        <CheckBox x:Name="chkRestartPC" Content="Restart PC" HorizontalAlignment="Left" Margin="61,450,0,0" VerticalAlignment="Top" Background="#FFF7B2B2" Foreground="Red" Grid.ColumnSpan="2" Grid.Column="2" Unchecked="ChkRestartPC_Unchecked" Checked="ChkRestartPC_Checked"/>
+        <TextBox x:Name="txtHour" AcceptsReturn="False" Height="23" Margin="512,383,34,0" TextWrapping="NoWrap" Text="12" VerticalAlignment="Top" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TxtHour_TextChanged"/>
+        <TextBox x:Name="txtMinute" HorizontalAlignment="Left" Height="23" Margin="579,383,0,0" TextWrapping="NoWrap" AcceptsReturn="False" Text="00" VerticalAlignment="Top" Width="53" PreviewTextInput="TextBox_PreviewTextInput" Grid.ColumnSpan="2" TextChanged="TxtMinute_TextChanged"/>
+        <Label Content=":" HorizontalAlignment="Left" Margin="565,381,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labStatus" Content="OFF" HorizontalAlignment="Left" Height="62" Margin="436,10,0,0" VerticalAlignment="Top" Width="90" FontSize="36" Background="Red"/>
+        <CheckBox x:Name="chkWarnings" Content="Chat Warnings" Grid.Column="2" HorizontalAlignment="Left" Margin="61,330,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="104" Unchecked="ChkWarnings_Unchecked" Checked="ChkWarnings_Checked"/>
+        <xctk:ColorPicker x:Name="clrPicker" Grid.Column="2" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top" Width="45" Height="23" StandardColors="{Binding ColorList}" AvailableColors="{Binding ColorList}" SelectedColor="Black" ShowAvailableColors="False" ShowTabHeaders="False"/>
+
+    </Grid>
+</Window>
